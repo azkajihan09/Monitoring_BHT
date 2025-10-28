@@ -301,30 +301,7 @@
 					</ul>
 				</li>
 
-				<!-- Usia Pihak -->
-				<li class="nav-item">
-					<a href="#" class="nav-link">
-						<i class="nav-icon fas fa-user-friends"></i>
-						<p>
-							Usia Pihak
-							<i class="fas fa-angle-left right"></i>
-						</p>
-					</a>
-					<ul class="nav nav-treeview">
-						<li class="nav-item">
-							<a href="<?php echo site_url('usia_pihak_p') ?>" class="nav-link">
-								<i class="fas fa-user-alt nav-icon"></i>
-								<p>Penggugat/Pemohon</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="<?php echo site_url('usia_pihak_t') ?>" class="nav-link">
-								<i class="fas fa-user-alt nav-icon"></i>
-								<p>Tergugat/Termohon</p>
-							</a>
-						</li>
-					</ul>
-				</li>
+				
 
 				<li class="nav-header">DATA &amp; PENGEMBANGAN</li>
 
