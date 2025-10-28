@@ -42,7 +42,7 @@
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
-						
+
 						<li class="nav-item">
 							<a href="<?php echo site_url('Bht_putus') ?>" class="nav-link">
 								<i class="fas fa-file-signature nav-icon"></i>
@@ -55,15 +55,21 @@
 								<p>BHT Perkara Putus 2</p>
 							</a>
 						</li>
-						
+						<li class="nav-item">
+							<a href="<?php echo site_url('Bht_putus_3') ?>" class="nav-link">
+								<i class="fas fa-file-invoice nav-icon"></i>
+								<p>BHT Perkara Putus 3</p>
+							</a>
+						</li>
+
 					</ul>
 				</li>
 
-				<!-- Data & Pengembangan -->			
+				<!-- Data & Pengembangan -->
 
 				<li class="nav-header">DATA &amp; PENGEMBANGAN</li>
 
-				
+
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->
