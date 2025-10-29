@@ -65,10 +65,83 @@
 					</ul>
 				</li>
 
+				<!-- BHT Reminder System -->
+				<li class="nav-item">
+					<a href="#" class="nav-link">
+						<i class="nav-icon fas fa-bell text-warning"></i>
+						<p>
+							Sistem Pengingat BHT
+							<i class="fas fa-angle-left right"></i>
+						</p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="<?php echo site_url('bht_reminder') ?>" class="nav-link <?= $this->uri->segment(1) == 'bht_reminder' ? 'active' : '' ?>">
+								<i class="fas fa-clock nav-icon text-danger"></i>
+								<p>Dashboard Pengingat</p>
+								<span class="badge badge-danger right" id="reminder-count">0</span>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?php echo site_url('api/bht/reminders') ?>" class="nav-link" target="_blank">
+								<i class="fas fa-list nav-icon"></i>
+								<p>Data Pengingat (API)</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?php echo site_url('bht_reminder/export_report?format=excel') ?>" class="nav-link">
+								<i class="fas fa-file-excel nav-icon text-success"></i>
+								<p>Export Laporan Excel</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+
 				<!-- Data & Pengembangan -->
 
 				<li class="nav-header">DATA &amp; PENGEMBANGAN</li>
 
+				<!-- Dashboard BHT Original -->
+				<li class="nav-item">
+					<a href="<?php echo site_url('dashboard_bht') ?>" class="nav-link <?= $this->uri->segment(1) == 'dashboard_bht' ? 'active' : '' ?>">
+						<i class="nav-icon fas fa-chart-line text-info"></i>
+						<p>Dashboard BHT Visual</p>
+					</a>
+				</li>
+
+				<!-- Testing & Development (Show only in development) -->
+				<?php if (ENVIRONMENT === 'development'): ?>
+					<li class="nav-header">TESTING & DEBUG</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i class="nav-icon fas fa-bug text-warning"></i>
+							<p>
+								Development Tools
+								<i class="fas fa-angle-left right"></i>
+							</p>
+						</a>
+						<ul class="nav nav-treeview">
+							<li class="nav-item">
+								<a href="<?php echo site_url('test/bht') ?>" class="nav-link" target="_blank">
+									<i class="fas fa-vial nav-icon"></i>
+									<p>Test BHT System</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?php echo site_url('test/bht/template') ?>" class="nav-link" target="_blank">
+									<i class="fas fa-code nav-icon"></i>
+									<p>Test Template System</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="<?php echo base_url('README_BHT_SYSTEM.md') ?>" class="nav-link" target="_blank">
+									<i class="fas fa-book nav-icon text-primary"></i>
+									<p>Dokumentasi System</p>
+								</a>
+							</li>
+						</ul>
+					</li>
+				<?php endif; ?>
 
 			</ul>
 		</nav>
@@ -76,3 +149,80 @@
 	</div>
 	<!-- /.sidebar -->
 </aside>
+
+<!-- JavaScript untuk update badge counter pengingat -->
+<script>
+	$(document).ready(function() {
+		// Update reminder counter saat halaman dimuat
+		updateReminderCounter();
+
+		// Update setiap 2 menit
+		setInterval(updateReminderCounter, 2 * 60 * 1000);
+	});
+
+	function updateReminderCounter() {
+		$.ajax({
+			url: '<?= base_url("api/bht/reminders") ?>',
+			method: 'GET',
+			data: {
+				status: 'URGENT'
+			}, // Hanya hitung yang urgent
+			dataType: 'json',
+			success: function(response) {
+				if (response.success && response.count !== undefined) {
+					const badge = $('#reminder-count');
+					const count = parseInt(response.count);
+
+					if (count > 0) {
+						badge.text(count);
+						badge.removeClass('badge-secondary').addClass('badge-danger');
+
+						// Animate badge jika ada urgent reminders
+						badge.addClass('badge-pulse');
+					} else {
+						badge.text('0');
+						badge.removeClass('badge-danger badge-pulse').addClass('badge-secondary');
+					}
+				}
+			},
+			error: function() {
+				// Jika error, set badge ke tanda tanya
+				$('#reminder-count').text('?').removeClass('badge-danger').addClass('badge-warning');
+			}
+		});
+	}
+</script>
+
+<!-- CSS untuk animasi badge -->
+<style>
+	.badge-pulse {
+		animation: pulse-badge 2s infinite;
+	}
+
+	@keyframes pulse-badge {
+		0% {
+			transform: scale(1);
+			opacity: 1;
+		}
+
+		50% {
+			transform: scale(1.1);
+			opacity: 0.7;
+		}
+
+		100% {
+			transform: scale(1);
+			opacity: 1;
+		}
+	}
+
+	/* Styling khusus untuk menu BHT */
+	.nav-sidebar .nav-item>.nav-link.active .nav-icon {
+		color: #ffc107 !important;
+	}
+
+	/* Highlight untuk menu pengingat */
+	.nav-sidebar .nav-item>.nav-link:hover .text-warning {
+		color: #fff !important;
+	}
+</style>

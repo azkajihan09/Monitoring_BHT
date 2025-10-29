@@ -52,3 +52,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+// ========== CUSTOM ROUTES UNTUK SISTEM BHT ==========
+
+// Route untuk BHT Reminder System
+$route['bht-reminder'] = 'bht_reminder/index';
+$route['bht-reminder/(:any)'] = 'bht_reminder/$1';
+
+// Route untuk AJAX calls (lebih SEO friendly)
+$route['api/bht/reminders'] = 'bht_reminder/get_filtered_reminders';
+$route['api/bht/report'] = 'bht_reminder/get_monthly_report';
+$route['api/bht/charts'] = 'bht_reminder/get_chart_data';
+$route['api/bht/mark-handled'] = 'bht_reminder/mark_handled';
+
+// Route untuk Export
+$route['bht-reminder/export/(:any)'] = 'bht_reminder/export_report/$1';
+
+// Route untuk Testing (hanya untuk development)
+$route['test/bht'] = 'bht_reminder_test/index';
+$route['test/bht/template'] = 'bht_reminder_test/test_with_template';
