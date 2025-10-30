@@ -61,6 +61,13 @@
 								<p>BHT Perkara Putus 3</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="<?php echo site_url('bht_putus_4') ?>" class="nav-link <?= $this->uri->segment(1) == 'bht_putus_4' ? 'active' : '' ?>">
+								<i class="fas fa-sort-amount-down nav-icon text-primary"></i>
+								<p>BHT Putus 4 - Sorting</p>
+								<span class="badge badge-info right">NEW</span>
+							</a>
+						</li>
 
 					</ul>
 				</li>

@@ -68,6 +68,13 @@ $route['api/bht/mark-handled'] = 'bht_reminder/mark_handled';
 // Route untuk Export
 $route['bht-reminder/export/(:any)'] = 'bht_reminder/export_report/$1';
 
+// Route untuk BHT Putus 4 System (Enhanced Date Sorting)
+$route['bht-putus-4'] = 'bht_putus_4/index';
+$route['bht-putus-4/(:any)'] = 'bht_putus_4/$1';
+$route['api/bht-putus-4/data'] = 'bht_putus_4/get_data_ajax';
+$route['api/bht-putus-4/stats'] = 'bht_putus_4/get_quick_stats';
+$route['export/bht-putus-4/excel'] = 'bht_putus_4/export_excel';
+
 // Route untuk Testing (hanya untuk development)
 $route['test/bht'] = 'bht_reminder_test/index';
 $route['test/bht/template'] = 'bht_reminder_test/test_with_template';
